@@ -22,6 +22,8 @@ class GlobalSetting(object):
     site_title = '后台管理系统'
     # 修改footer
     site_footer = '在线学习网'
+    # 收起菜单
+    menu_style = 'accordion'
 
 
 class EmailVerifyRecordAdmin(object):
