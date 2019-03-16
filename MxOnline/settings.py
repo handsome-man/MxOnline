@@ -41,8 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
+    'users.apps.CourseConfig',
+    'users.apps.OperationConfig',
+    'users.apps.OrganizationConfig',
     'xadmin',
     'crispy_forms',
+    # 不加会报错
     'reversion',
 ]
 
