@@ -40,10 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users.apps.UsersConfig',
-    'users.apps.CourseConfig',
-    'users.apps.OperationConfig',
-    'users.apps.OrganizationConfig',
+    'users',
+    'course',
+    'operation',
+    'organization',
     'xadmin',
     'crispy_forms',
     # 不加会报错
@@ -126,6 +126,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+AUTH_USER_MODEL = 'users.UserProfile'
 
 
 # Static files (CSS, JavaScript, Images)
