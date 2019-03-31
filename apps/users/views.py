@@ -23,3 +23,10 @@ class RegisterView(View):
 
     def get(self, request):
         return render(request, 'register.html', {})
+
+
+class ForgetPWD(View):
+    # 忘记密码
+
+    def get(self, request):
+        return render(request, 'forgetpwd.html', {})
