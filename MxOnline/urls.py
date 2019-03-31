@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path
 
 import xadmin
-from users.views import IndexView
+from users.views import IndexView, LoginView, RegisterView
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
     path('', IndexView.as_view(), name='index'),
+    path('login', LoginView.as_view(), name='login'),
+    path('register', RegisterView.as_view(), name='register'),
 ]
