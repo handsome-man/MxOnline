@@ -6,7 +6,7 @@ from django.views.generic import View
 
 
 # Create your views here.
-from users.forms import LoginForm
+from users.forms import LoginForm, RegisterForm
 from users.utils import get_param
 
 
@@ -23,7 +23,7 @@ class LoginView(View):
 
     @staticmethod
     def get(request):
-        return render(request, 'login.html', {})
+        return render(request, 'login.html')
 
     @staticmethod
     def post(request):
@@ -50,11 +50,12 @@ class RegisterView(View):
 
     @staticmethod
     def get(request):
-        return render(request, 'register.html', {})
+        register_form = RegisterForm()
+        return render(request, 'register.html', {'register_form': register_form})
 
     @staticmethod
     def post(request):
-        pass
+        register_form = RegisterForm(get_param(request))
 
 
 class ForgetPWD(View):
