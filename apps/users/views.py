@@ -1,5 +1,5 @@
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import View
@@ -31,17 +31,18 @@ class LoginView(View):
         if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
-            print({'username': username, 'password': password})
             user = authenticate(username=username, password=password)
             if user is not None:
                 # 注册并且激活才可以登录
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse(reverse('index'))
+                    return HttpResponseRedirect(reverse('index'))
                 else:
-                    return render(request, 'login.html', {'msg': '用户名或密码错误', 'login_form': login_form})
+                    return render(request, 'login.html', {'login_form': login_form})
+            else:
+                return render(request, 'login.html', {'login_form': login_form})
         else:
-            return render(request, 'login.html')
+            return render(request, 'login.html', {'login_form': login_form})
 
 
 class RegisterView(View):
