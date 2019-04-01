@@ -1,0 +1,11 @@
+diff a/.idea/workspace.xml b/.idea/workspace.xml	(rejected hunks)
+@@ -2,6 +2,9 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="aef42077-de3e-4bc6-9d8e-41d24f7c9181" name="Default" comment="">
++      <change afterPath="$PROJECT_DIR$/apps/users/forms.py" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/apps/users/utils.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/apps/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/users/views.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+     </list>
