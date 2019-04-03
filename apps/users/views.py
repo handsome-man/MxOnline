@@ -42,7 +42,6 @@ class LoginView(View):
             password = login_form.cleaned_data['password']
             user = authenticate(username=username, password=password)
             if user is not None:
-                # 注册并且激活才可以登录
                 if user.is_active:
                     login(request, user)
                     return HttpResponseRedirect(reverse('index'))
@@ -77,3 +76,9 @@ class ForgetPWD(View):
     @staticmethod
     def post(request):
         pass
+
+
+class UserInfo(View):
+    """用户中心"""
+    @staticmethod
+
