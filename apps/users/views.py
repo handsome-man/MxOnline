@@ -4,9 +4,11 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import View
 
-
 # Create your views here.
+from course.models import Course
+from organization.models import CourseOrg
 from users.forms import LoginForm, RegisterForm
+from users.models import Banner
 from users.utils import get_param
 
 
@@ -15,7 +17,14 @@ class IndexView(View):
 
     @staticmethod
     def get(request):
-        return render(request, 'index.html', {})
+        all_banners = Banner.objects.all().order_by('index')
+        courses = Course.objects.filter(is_banner=False)[:6]
+        banner_courses = Course.objects.filter(is_banner=True)[:2]
+        course_organizations = CourseOrg.objects.all()[:15]
+        return render(request, 'index.html', {'all_banners': all_banners,
+                                              'courses': courses,
+                                              'banner_course': banner_courses,
+                                              'course_organizations': course_organizations})
 
 
 class LoginView(View):

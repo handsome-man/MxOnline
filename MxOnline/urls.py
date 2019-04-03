@@ -14,13 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+from django.views.static import serve
 
 import xadmin
 from users.views import IndexView, LoginView, RegisterView, ForgetPWD
+from MxOnline.settings import MEDIA_ROOT
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root':MEDIA_ROOT}),
     path('', IndexView.as_view(), name='index'),
     path('login', LoginView.as_view(), name='login'),
     path('register', RegisterView.as_view(), name='register'),
