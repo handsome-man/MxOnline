@@ -8,6 +8,7 @@ from users.models import UserProfile
 class UserCheckMixin(forms.Form):
     """用户名验证"""
     username = forms.CharField(required=True)
+
     def clean_username(self):
         """检测用户名"""
         username = self.cleaned_data['username']
@@ -15,9 +16,11 @@ class UserCheckMixin(forms.Form):
             raise forms.ValidationError(('账号(%(username)s) 没有注册，请先注册'), params={'username': username})
         return username
 
+
 class EmailCheckMixin(forms.Form):
     """邮箱验证"""
     email = forms.EmailField(required=True)
+
     def clean_email(self):
         email = self.cleaned_data['email']
         if UserProfile.objects.filter(email=email).exists():
@@ -41,10 +44,10 @@ class LoginForm(UserCheckMixin):
             raise forms.ValidationError('密码输入错误')
 
 
-
 class RegisterForm(EmailCheckMixin):
     """注册表单"""
     password = forms.CharField(required=True, min_length=5)
+
     # captcha = CaptchaField(error_messages={'invalid': '验证码错误'})
     def save(self, commit=True):
         user = UserProfile.objects.create_user(
