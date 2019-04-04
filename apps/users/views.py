@@ -80,6 +80,6 @@ class ForgetPWD(View):
 
 class UserInfo(View):
     """用户中心"""
-    @staticmethod
+    # @staticmethod
     pass
 
