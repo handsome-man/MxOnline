@@ -18,7 +18,7 @@ from django.urls import path, re_path
 from django.views.static import serve
 
 import xadmin
-from users.views import IndexView, LoginView, RegisterView, ForgetPWD
+from users.views import IndexView, LoginView, RegisterView, ForgetPWD, MyInfoView, MyFavCourseView, MyCourseView, MyMessageView, MyFavOrgView, MyFavTeacherView
 from MxOnline.settings import MEDIA_ROOT
 
 urlpatterns = [
@@ -28,5 +28,10 @@ urlpatterns = [
     path('login', LoginView.as_view(), name='login'),
     path('register', RegisterView.as_view(), name='register'),
     path('forgetpwd', ForgetPWD.as_view(), name='forgetpwd'),
-    path('usercenter-info',)
+    path('mycenter', MyInfoView.as_view(), name='mycenter'),
+    path('myfavcourse', MyFavCourseView.as_view(), name='myfavcourse'),
+    path('mycourse', MyCourseView.as_view(), name='mycourse'),
+    path('mymessage', MyMessageView.as_view(), name='mymessage'),
+    path('mycourse_teacher', MyFavTeacherView.as_view(), name='mycourse_teacher'),
+    path('myorg', MyFavOrgView.as_view(), name='myorg'),
 ]

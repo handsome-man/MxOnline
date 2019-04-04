@@ -78,8 +78,45 @@ class ForgetPWD(View):
         pass
 
 
-class UserInfo(View):
+class MyInfoView(View):
     """用户中心"""
-    # @staticmethod
-    pass
+    @staticmethod
+    def get(request):
+        return render(request, 'usercenter-info.html')
+
+
+class MyFavCourseView(View):
+    """我的收藏"""
+    @staticmethod
+    def get(request):
+        return render(request, 'usercenter-fav-course.html')
+
+
+class MyCourseView(View):
+    """我的课程"""
+    @staticmethod
+    def get(request):
+        return render(request, 'usercenter-mycourse.html')
+
+
+class MyMessageView(View):
+    """我的消息"""
+    @staticmethod
+    def get(request):
+        return render(request, 'usercenter-message.html')
+
+
+class MyFavTeacherView(View):
+    """我收藏的授课教师"""
+    @staticmethod
+    def get(request):
+        return render(request, 'usercenter-fav-teacher.html')
+
+
+class MyFavOrgView(View):
+    """我收藏的课程机构"""
+    @staticmethod
+    def get(request):
+        return render(request, 'usercenter-fav-org.html')
+
 
