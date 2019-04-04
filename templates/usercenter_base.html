@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
-
+{% load staticfiles %}
 <head>
     <meta charset="UTF-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/static/js/plugins/queryCity/css/cityLayout.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'js/plugins/queryCity/css/cityLayout.css' %}">
 
-    <link rel="stylesheet" type="text/css" href="/static/css/lq.datetimepick.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/lq.datetimepick.css' %}"/>
 
 
-    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/static/js/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
 
 </head>
 <body>
@@ -31,7 +31,7 @@
 
                     <div class="personal">
                         <dl class="user fr">
-                            <dd>kevin<img class="down fr" src="/static/images/top_down.png"/></dd>
+                            <dd>kevin<img class="down fr" src="{% static 'images/top_down.png' %}"/></dd>
                             <dt><img width="20" height="20" src="/media/image/201904/刘路南.JPG"/></dt>
                         </dl>
                         <div class="userdetail">
@@ -43,12 +43,12 @@
                                 </dd>
                             </dl>
                             <div class="btn">
-                                <a class="personcenter fl" href="/usercenter">进入个人中心</a>
+                                <a class="personcenter fl" href="/users/usercenter">进入个人中心</a>
                                 <a class="fr" href="/logout/">退出</a>
                             </div>
                         </div>
                     </div>
-                    <a href="usercenter-message.html">
+                    <a href="/mymessage">
                         <div class="msg-num"><span id="MsgNum">0</span></div>
                     </a>
 
@@ -58,7 +58,7 @@
 
             <div class="middle">
                 <div class="wp">
-                    <a href="index.html"><img class="fl" src="/static/images/logo2.png"/></a>
+                    <a href="index.html"><img class="fl" src="{% static 'images/logo2.png' %}"/></a>
                     <h1>我的学习网</h1>
                 </div>
             </div>
@@ -81,11 +81,11 @@
     <div class="wp list personal_list">
         <div class="left">
             <ul>
-                <li class="active2"><a href="/mycenter">个人资料</a></li>
-                <li><a href="/mycourse">我的课程</a></li>
-                <li><a href="/myfavcourse">我的收藏</a></li>
+                <li class="active2"><a href="/users/mycenter">个人资料</a></li>
+                <li><a href="/users/mycourse">我的课程</a></li>
+                <li><a href="/users/myfavcourse">我的收藏</a></li>
                 <li>
-                    <a href="/mymessage" style="position: relative;">
+                    <a href="/users/mymessage" style="position: relative;">
                         我的消息
                     </a>
                 </li>
@@ -112,7 +112,7 @@
 <div class="dialog" id="jsDialog">
     <div class="successbox dialogbox" id="jsSuccessTips">
         <h1>成功提交</h1>
-        <div class="close jsCloseDialog"><img src="/static/images/dig_close.png"/></div>
+        <div class="close jsCloseDialog"><img src="{% static 'images/dig_close.png' %}"/></div>
         <div class="cont">
             <h2>您的需求提交成功！</h2>
             <p></p>
@@ -121,7 +121,7 @@
     <!--提示弹出框-->
     <div class="bidtips dialogbox promptbox" id="jsComfirmDialig">
         <h1>确认提交</h1>
-        <div class="close jsCloseDialog"><img src="/static/images/dig_close.png"/></div>
+        <div class="close jsCloseDialog"><img src="{% static 'images/dig_close.png' %}"/></div>
         <div class="cont">
             <h2>您确认提交吗？</h2>
             <dd class="autoTxtCount">
@@ -134,7 +134,7 @@
     </div>
     <div class="resetpwdbox dialogbox" id="jsResetDialog">
         <h1>修改密码</h1>
-        <div class="close jsCloseDialog"><img src="/static/images/dig_close.png"/></div>
+        <div class="close jsCloseDialog"><img src="{% static 'images/dig_close.png' %}"/></div>
         <div class="cont">
             <form id="jsResetPwdForm" autocomplete="off">
                 <div class="box">
@@ -156,7 +156,7 @@
     </div>
     <div class="dialogbox changeemai1 changephone" id="jsChangeEmailDialog">
         <h1>修改邮箱</h1>
-        <div class="close jsCloseDialog"><img src="/static/images/dig_close.png"/></div>
+        <div class="close jsCloseDialog"><img src="{% static 'images/dig_close.png' %}"/></div>
         <p>请输入新的邮箱地址</p>
         <form id="jsChangeEmailForm" autocomplete="off">
             <div class="box">
@@ -177,9 +177,9 @@
 
     <div class="noactivebox dialogbox" id="jsUnactiveForm">
         <h1>邮件验证提示</h1>
-        <div class="close jsCloseDialog"><img src="/static/images/dig_close.png"/></div>
+        <div class="close jsCloseDialog"><img src="{% static 'images/dig_close.png' %}"/></div>
         <div class="center">
-            <img src="/static/images/send.png"/>
+            <img src="{% static 'images/send.png' %}"/>
             <p>我们已经向您的邮箱<span class="green" id="jsEmailToActive">12@13.com</span>发送了邮件，<br/>为保证您的账号安全，请及时验证邮箱</p>
             <p class="a"><a class="btn" id="jsGoToEmail" target="_blank" href="http://mail.qq.com">去邮箱验证</a></p>
             <p class="zy_success upmove"></p>
@@ -190,7 +190,7 @@
     </div>
     <div class="resetpassbox dialogbox" id="jsSetNewPwd">
         <h1>重新设置密码</h1>
-        <div class="close jsCloseDialog"><img src="/static/images/dig_close.png"/></div>
+        <div class="close jsCloseDialog"><img src="{% static 'images/dig_close.png' %}"/></div>
         <p class="green">请输入新密码</p>
         <form id="jsSetNewPwdForm">
             <div class="box">
@@ -215,7 +215,7 @@
     </div>
     <div class="forgetbox dialogbox">
         <h1>忘记密码</h1>
-        <div class="close jsCloseDialog"><img src="/static/images/dig_close.png"/></div>
+        <div class="close jsCloseDialog"><img src="{% static 'images/dig_close.png' %}"/></div>
         <div class="cont">
             <form id="jsFindPwdForm" autocomplete="off">
                 <input type='hidden' name='csrfmiddlewaretoken' value='DaP7IUKm9FA9nELA9YUlYYWpyIDdCiIP'/>
@@ -244,18 +244,18 @@
 <div class="bg" id="dialogBg"></div>
 
 
-<script src="/static/js/selectUi.js" type='text/javascript'></script>
-<script type="text/javascript" src="/static/js/plugins/laydate/laydate.js"></script>
-<script src="/static/js/plugins/layer/layer.js"></script>
-<script src="/static/js/plugins/queryCity/js/public.js" type="text/javascript"></script>
-<script src="/static/js/unslider.js" type="text/javascript"></script>
-<script src="/static/js/plugins/jquery.scrollLoading.js" type="text/javascript"></script>
-<script src="/static/js/validateDialog.js" type="text/javascript"></script>
-<script src="/static/js/deco-common.js" type="text/javascript"></script>
+<script src="{% static 'js/selectUi.js' %}" type='text/javascript'></script>
+<script type="text/javascript" src="{% static 'js/plugins/laydate/laydate.js' %}"></script>
+<script src="{% static 'js/js/plugins/layer/layer.js' %}"></script>
+<script src="{% static 'js/plugins/queryCity/js/public.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/unslider.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/plugins/jquery.scrollLoading.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/validateDialog.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/deco-common.js' %}" type="text/javascript"></script>
 
-<script src='/static/js/plugins/jquery.upload.js' type='text/javascript'></script>
-<script src="/static/js/validate.js" type="text/javascript"></script>
-<script src="/static/js/deco-user.js"></script>
+<script src="{% static 'js/plugins/jquery.upload.js' %}" type='text/javascript'></script>
+<script src="{% static 'js/validate.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/deco-user.js' %}"></script>
 
 <script type="text/javascript">
     $('.jsDeleteFav_course').on('click', function () {

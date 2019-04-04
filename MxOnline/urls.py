@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from django.views.static import serve
 
 import xadmin
 from users.views import IndexView, LoginView, RegisterView, ForgetPWD, MyInfoView, MyFavCourseView, MyCourseView, MyMessageView, MyFavOrgView, MyFavTeacherView
 from MxOnline.settings import MEDIA_ROOT
+from users import urls as user_url
+from course import urls as course_url
+from organization import urls as organization_url
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),
@@ -28,10 +31,13 @@ urlpatterns = [
     path('login', LoginView.as_view(), name='login'),
     path('register', RegisterView.as_view(), name='register'),
     path('forgetpwd', ForgetPWD.as_view(), name='forgetpwd'),
-    path('mycenter', MyInfoView.as_view(), name='mycenter'),
-    path('myfavcourse', MyFavCourseView.as_view(), name='myfavcourse'),
-    path('mycourse', MyCourseView.as_view(), name='mycourse'),
-    path('mymessage', MyMessageView.as_view(), name='mymessage'),
-    path('mycourse_teacher', MyFavTeacherView.as_view(), name='mycourse_teacher'),
-    path('myorg', MyFavOrgView.as_view(), name='myorg'),
+
+    # 用户路径
+    path("users/", include((user_url, 'users'), namespace="users")),
+
+    # 课程
+    path("course/", include((course_url, 'course'), namespace="course")),
+
+    # 组织机构
+    path("organization/", include((organization_url, 'organization'), namespace="organization")),
 ]
