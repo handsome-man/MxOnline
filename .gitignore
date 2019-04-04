@@ -46,5 +46,5 @@ cms/static/cms/compass_app_log.txt
 cms/tests/frontend/coverage
 node_modules
 screenshots
-.idea
+.idea/
 .better_test.db
