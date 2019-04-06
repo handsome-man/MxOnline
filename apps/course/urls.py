@@ -8,5 +8,5 @@ from .views import CourseListView
 
 urlpatterns = [
     # 课程列表
-    path('course_list', CourseListView.as_view(), name='course_list'),
+    path('list', CourseListView.as_view(), name='course_list'),
 ]

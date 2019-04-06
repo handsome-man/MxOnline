@@ -18,7 +18,7 @@ from django.urls import path, re_path, include
 from django.views.static import serve
 
 import xadmin
-from users.views import IndexView, LoginView, RegisterView, ForgetPWD, MyInfoView, MyFavCourseView, MyCourseView, MyMessageView, MyFavOrgView, MyFavTeacherView
+from users.views import IndexView, LoginView, RegisterView, ForgetPWD
 from MxOnline.settings import MEDIA_ROOT
 from users import urls as user_url
 from course import urls as course_url
