@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -51,6 +51,14 @@ class LoginView(View):
                 return render(request, 'login.html', {'login_form': login_form})
         else:
             return render(request, 'login.html', {'login_form': login_form})
+
+
+class LogoutView(View):
+    """退出"""
+    @staticmethod
+    def get(request):
+        logout(request)
+        return HttpResponseRedirect(reverse('index'))
 
 
 class RegisterView(View):

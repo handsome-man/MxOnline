@@ -18,7 +18,7 @@ from django.urls import path, re_path, include
 from django.views.static import serve
 
 import xadmin
-from users.views import IndexView, LoginView, RegisterView, ForgetPWD
+from users.views import IndexView, LoginView, RegisterView, ForgetPWD, LogoutView
 from MxOnline.settings import MEDIA_ROOT
 from users import urls as user_url
 from course import urls as course_url
@@ -29,6 +29,7 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root':MEDIA_ROOT}),
     path('', IndexView.as_view(), name='index'),
     path('login', LoginView.as_view(), name='login'),
+    path('logout', LogoutView.as_view(), name='logout'),
     path('register', RegisterView.as_view(), name='register'),
     path('forgetpwd', ForgetPWD.as_view(), name='forgetpwd'),
 
