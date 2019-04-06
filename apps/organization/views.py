@@ -11,8 +11,15 @@ class TeacherListView(View):
         return render(request, 'teachers-list.html')
 
 
-class OrganizationList(View):
-    """组织列表"""
+class OrganizationListView(View):
+    """机构列表"""
     @staticmethod
     def get(request):
         return render(request, 'org-list.html')
+
+
+class OrganizationIndexView(View):
+    """机构首页"""
+    @staticmethod
+    def get(request):
+        return render(request, 'org-detail-homepage.html')

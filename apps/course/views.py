@@ -10,3 +10,10 @@ class CourseListView(View):
     @staticmethod
     def get(request):
         return render(request, 'course-list.html')
+
+
+class CourseDetailView(View):
+    """课程详情"""
+    @staticmethod
+    def get(request):
+        return render(request, 'course-detail.html')

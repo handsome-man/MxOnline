@@ -5,7 +5,7 @@ __date__ = '2019/4/4 16:39'
 from django.urls import path
 
 from users.views import MyFavOrgView
-from .views import TeacherListView, OrganizationList
+from .views import TeacherListView, OrganizationListView, OrganizationIndexView
 
 urlpatterns = [
     # 我的组织
@@ -13,5 +13,7 @@ urlpatterns = [
     # 教师列表
     path('teacher_list', TeacherListView.as_view(), name='teacher_list'),
     # 组织列表
-    path('org_list', OrganizationList.as_view(), name='org_list')
+    path('org_list', OrganizationListView.as_view(), name='org_list'),
+    # 机构首页
+    path('org_index', OrganizationIndexView.as_view(), name='org_index'),
 ]
