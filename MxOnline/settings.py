@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     # 不加会报错
     'reversion',
+    # 图片登陆验证
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +141,11 @@ STATICFILES_DIRS = (
 # 用户上传文件路径
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True   #是否使用TLS安全传输协议(用于在两个通信应用程序之间提供保密性和数据完整性。)
+EMAIL_HOST = 'smtp.163.com'   #发送邮件的邮箱 的 SMTP服务器，这里用了163邮箱
+EMAIL_PORT = 25     #发件箱的SMTP服务器端口
+EMAIL_HOST_USER = 'liulunan_lln@163.com'    #发送邮件的邮箱地址
+EMAIL_HOST_PASSWORD = 'liu123'         #发送邮件的邮箱密码(这里使用的是授权码)

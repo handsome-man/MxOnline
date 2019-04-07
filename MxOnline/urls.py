@@ -18,7 +18,7 @@ from django.urls import path, re_path, include
 from django.views.static import serve
 
 import xadmin
-from users.views import IndexView, LoginView, RegisterView, ForgetPWD, LogoutView
+from users.views import IndexView, LoginView, RegisterView, ForgetPWD, LogoutView, UserActiveView
 from MxOnline.settings import MEDIA_ROOT
 from users import urls as user_url
 from course import urls as course_url
@@ -31,6 +31,9 @@ urlpatterns = [
     path('login', LoginView.as_view(), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),
     path('register', RegisterView.as_view(), name='register'),
+    re_path('active/(?P<active_code>.*)', UserActiveView.as_view(), name='active'),
+    # 这是生成验证码的图片
+    path('captcha/',include('captcha.urls')),
     path('forgetpwd', ForgetPWD.as_view(), name='forgetpwd'),
 
     # 用户路径

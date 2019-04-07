@@ -1,4 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.backends import ModelBackend
+from django.contrib.auth.hashers import make_password
+from django.db import transaction
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -8,8 +12,25 @@ from django.views.generic import View
 from course.models import Course
 from organization.models import CourseOrg
 from users.forms import LoginForm, RegisterForm
-from users.models import Banner
+from users.models import Banner, UserProfile, EmailVerifyRecord
 from users.utils import get_param
+from utils.send_mail import send_register_email
+
+
+class CustomBackend(ModelBackend):
+    """
+    1.邮箱和用户都可以登陆
+    2.基于ModelBackend类，重写authenticate方法
+    """
+
+    def authenticate(self, request, username=None, password=None, **kwargs):
+        try:
+            user = UserProfile.objects.get(Q(username=username) | Q(email=username))
+            # 检验密码
+            if user.check_password(password):
+                return user
+        except Exception as e:
+            return None
 
 
 class IndexView(View):
@@ -55,10 +76,11 @@ class LoginView(View):
 
 class LogoutView(View):
     """退出"""
+
     @staticmethod
     def get(request):
         logout(request)
-        return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('login'))
 
 
 class RegisterView(View):
@@ -70,8 +92,40 @@ class RegisterView(View):
         return render(request, 'register.html', {'register_form': register_form})
 
     @staticmethod
+    @transaction.atomic
     def post(request):
         register_form = RegisterForm(get_param(request))
+        if register_form.is_valid():
+            email = request.POST.get('email', None)
+            password = request.POST.get('password', None)
+
+            user = UserProfile()
+            user.email = email
+            user.username = email
+            user.password = make_password(password)
+            user.is_active = False
+            user.save()
+            # 发送邮件给注册人，等待激活
+            send_register_email(email, 'register')
+            return render(request, 'login.html')
+        else:
+            return render(request, 'register.html', {'register_form': register_form})
+
+
+class UserActiveView(View):
+    """用户激活"""
+    @staticmethod
+    def get(request, active_code):
+        email = EmailVerifyRecord.objects.filter(code=active_code)
+        if email:
+            for email in email:
+                active = UserProfile.objects.get(email=email.email)
+                if active.is_active != True:
+                    active.is_active = True
+                    active.save()
+            return render(request, "login.html")
+        else:
+            return render(request, 'user_active_fail.html')
 
 
 class ForgetPWD(View):
@@ -88,6 +142,7 @@ class ForgetPWD(View):
 
 class MyInfoView(View):
     """用户中心"""
+
     @staticmethod
     def get(request):
         return render(request, 'usercenter-info.html')
@@ -95,6 +150,7 @@ class MyInfoView(View):
 
 class MyFavCourseView(View):
     """我的收藏"""
+
     @staticmethod
     def get(request):
         return render(request, 'usercenter-fav-course.html')
@@ -102,6 +158,7 @@ class MyFavCourseView(View):
 
 class MyCourseView(View):
     """我的课程"""
+
     @staticmethod
     def get(request):
         return render(request, 'usercenter-mycourse.html')
@@ -109,6 +166,7 @@ class MyCourseView(View):
 
 class MyMessageView(View):
     """我的消息"""
+
     @staticmethod
     def get(request):
         return render(request, 'usercenter-message.html')
@@ -116,6 +174,7 @@ class MyMessageView(View):
 
 class MyFavTeacherView(View):
     """我收藏的授课教师"""
+
     @staticmethod
     def get(request):
         return render(request, 'usercenter-fav-teacher.html')
@@ -123,8 +182,7 @@ class MyFavTeacherView(View):
 
 class MyFavOrgView(View):
     """我收藏的课程机构"""
+
     @staticmethod
     def get(request):
         return render(request, 'usercenter-fav-org.html')
-
-

@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django import forms
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
@@ -17,14 +18,14 @@ class UserCheckMixin(forms.Form):
         return username
 
 
-class EmailCheckMixin(forms.Form):
-    """邮箱验证"""
-    email = forms.EmailField(required=True)
-
-    def clean_email(self):
-        email = self.cleaned_data['email']
-        if UserProfile.objects.filter(email=email).exists():
-            raise forms.ValidationError(('邮箱(%(email)s))已经注册'), params={'email': email})
+# class EmailCheckMixin(forms.Form):
+#     """邮箱验证"""
+#     email = forms.EmailField(required=True)
+#
+#     def clean_email(self):
+#         email = self.cleaned_data['email']
+#         if UserProfile.objects.filter(email=email).exists():
+#             raise forms.ValidationError(('用户(%(email)s))已经注册'), params={'email': email})
 
 
 class LoginForm(UserCheckMixin):
@@ -44,15 +45,26 @@ class LoginForm(UserCheckMixin):
             raise forms.ValidationError('密码输入错误')
 
 
-class RegisterForm(EmailCheckMixin):
+class RegisterForm(forms.Form):
     """注册表单"""
     password = forms.CharField(required=True, min_length=5)
 
-    # captcha = CaptchaField(error_messages={'invalid': '验证码错误'})
-    def save(self, commit=True):
-        user = UserProfile.objects.create_user(
-            email=self.cleaned_data['email'],
-            password=self.cleaned_data['password'],
-        )
-        self.instance.user = user
-        return super(RegisterForm, self).save(commit)
+    # 为生成的验证码图片，以及输入框
+    captcha = CaptchaField(error_messages={'invalid': '验证码错误'})
+
+    email = forms.EmailField(required=True)
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if UserProfile.objects.filter(email=email).exists():
+            raise forms.ValidationError(('用户(%(email)s))已经注册'), params={'email': email})
+
+    # def save(self, commit=True):
+    #     print(self.cleaned_data)
+    #     user = UserProfile.objects.create_user(
+    #         email=self.cleaned_data['email'],
+    #         username=self.data['email'],
+    #         password=self.cleaned_data['password'],
+    #         is_active=False,
+    #     )
+    #     return super(RegisterForm, self).save(commit)
