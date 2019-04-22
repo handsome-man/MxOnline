@@ -16,7 +16,7 @@ from users.models import Banner, UserProfile, EmailVerifyRecord
 from users.utils import get_param
 from utils.send_mail import send_register_email
 
-
+# test1
 class CustomBackend(ModelBackend):
     """
     1.邮箱和用户都可以登陆
