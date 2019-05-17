@@ -18,7 +18,7 @@ class Course(models.Model):
     )
     name = models.CharField("课程名", max_length=50)
     desc = models.CharField("课程描述", max_length=300)
-    # detail = models.TextField("课程详情")
+    detail = models.TextField("课程详情")
     # detail = UEditorField(verbose_name=u'课程详情', width=600, height=300, imagePath="courses/ueditor/",
     #                       filePath="courses/ueditor/", default='')
 
@@ -41,11 +41,16 @@ class Course(models.Model):
         verbose_name = "课程"
         verbose_name_plural = verbose_name
 
+    def get_lesson_nums(self):
+        #获取课程的章节数
+        return self.lesson_set.all().count()
+
 
 class BannerCourse(Course):
     '''显示轮播课程'''
 
     class Meta:
+        ordering = ['id']
         verbose_name = '轮播课程'
         verbose_name_plural = verbose_name
 

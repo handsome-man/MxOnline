@@ -10,9 +10,9 @@ from .models import Course, BannerCourse, Lesson, Video, CourseResource
 class CourseAdmin(object):
     '课程'
 
-    list_display = ['name', 'desc', 'degree', 'learn_times', 'students', 'fav_nums', 'image', 'click_nums', 'tag', 'is_banner', 'add_time', 'course_org', 'category', 'teacher', 'youneed_know', 'teacher_tell']
-    search_fields = ['name', 'desc', 'degree', 'learn_times', 'students', 'fav_nums', 'image', 'click_nums', 'tag', 'is_banner', 'course_org', 'category', 'teacher', 'youneed_know', 'teacher_tell']
-    list_filter = ['name', 'desc', 'degree', 'learn_times', 'students', 'fav_nums', 'image', 'click_nums', 'tag', 'is_banner', 'add_time', 'course_org', 'category', 'teacher', 'youneed_know', 'teacher_tell']
+    list_display = ['name', 'desc', 'degree', 'learn_times', 'students', 'fav_nums', 'image', 'click_nums', 'tag', 'is_banner', 'add_time', 'course_org', 'category', 'teacher', 'youneed_know', 'teacher_tell', 'detail']
+    search_fields = ['name', 'desc', 'degree', 'learn_times', 'students', 'fav_nums', 'image', 'click_nums', 'tag', 'is_banner', 'course_org', 'category', 'teacher', 'youneed_know', 'teacher_tell', 'detail']
+    list_filter = ['name', 'desc', 'degree', 'learn_times', 'students', 'fav_nums', 'image', 'click_nums', 'tag', 'is_banner', 'add_time', 'course_org', 'category', 'teacher', 'youneed_know', 'teacher_tell', 'detail']
 
 
 class BannerCourseAdmin(object):

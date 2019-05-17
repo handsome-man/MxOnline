@@ -5,23 +5,23 @@
 
 {% block active %}
 <nav>
-                <div class="nav">
-                    <div class="wp">
-                        <ul>
-                            <li class="active"><a href="{% url 'index' %}">首页</a></li>
-                            <li>
-                                <a href="{% url 'course:list' %}">
-                                    公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'organization:teacher_list' %}">授课教师</a>
-                            </li>
-                            <li><a href="{% url 'organization:org_list' %}">授课机构</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+    <div class="nav">
+        <div class="wp">
+            <ul>
+                <li class="active"><a href="{% url 'index' %}">首页</a></li>
+                <li>
+                    <a href="{% url 'course:list' %}">
+                        公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'organization:teacher_list' %}">授课教师</a>
+                </li>
+                <li><a href="{% url 'organization:org_list' %}">授课机构</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 {% endblock %}
 
 {% block body %}
@@ -32,11 +32,11 @@
             <div class="imgslide">
                 <ul class="iamgs">
                     {% for banner in all_banners %}
-                        <li>
-                            <a href="{{ banner.url }}">
-                                <img width="1200" height="478" src="{{ MEDIA_URL }}{{ banner.image }}"/>
-                            </a>
-                        </li>
+                    <li>
+                        <a href="{{ banner.url }}">
+                            <img width="1200" height="478" src="{{ MEDIA_URL }}{{ banner.image }}"/>
+                        </a>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -87,8 +87,8 @@
                             <ul class="imgs">
                                 <!-- 轮播课程 -->
                                 {% for course in banner_course %}
-                                    <li>
-                                    <a href="{% url 'course:detail' %}">
+                                <li>
+                                    <a href="{% url 'course:detail' course.id %}">
                                         <img width="470" height="300" src="{{ MEDIA_URL }}{{ course.image }}"/>
                                     </a>
                                 </li>
@@ -100,23 +100,23 @@
                     </div>
                     <!-- 课程列表 -->
                     {%for course in courses%}
-                        <div class="module1_4 box">
-                            <a href="{% url 'course:detail' %}">
-                                <img width="233" height="190"
-                                     src="{{ MEDIA_URL }}{{ course.image }}"/>
+                    <div class="module1_4 box">
+                        <a href="{% url 'course:detail' course.id %}">
+                            <img width="233" height="190"
+                                 src="{{ MEDIA_URL }}{{ course.image }}"/>
+                        </a>
+                        <div class="des">
+                            <a href="{% url 'course:detail' course.id %}">
+                                <h2 title="java入门">{{ course.name }}</h2>
                             </a>
-                            <div class="des">
-                                <a href="course-detail.html">
-                                    <h2 title="java入门">{{ course.name }}</h2>
-                                </a>
-                                <span class="fl">难度：<i class="key">{{ course.degree }}</i></span>
-                                <span class="fr">学习人数：{{ course.students }}</span>
-                            </div>
-                            <div class="bottom">
-                                <span class="fl" title="北京大学">{{ course.tag }}</span>
-                                <span class="star fr">{{ course.click_nums }}</span>
-                            </div>
+                            <span class="fl">难度：<i class="key">{{ course.get_degree_display }}</i></span>
+                            <span class="fr">学习人数：{{ course.students }}</span>
                         </div>
+                        <div class="bottom">
+                            <span class="fl" title="北京大学">{{ course.tag }}</span>
+                            <span class="star fr">{{ course.click_nums }}</span>
+                        </div>
+                    </div>
                     {%endfor%}
                 </div>
             </div>
@@ -136,7 +136,7 @@
                 <div class="right">
                     <ul>
                         {% for course_org in course_organizations %}
-                            <li class="">
+                        <li class="">
                             <a href="{% url 'organization:org_index' %}">
                                 <div class="company">
                                     <img width="184" height="100" src="{{ MEDIA_URL }}{{ course_org.image }}"/>

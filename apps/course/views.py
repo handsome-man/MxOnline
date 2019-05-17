@@ -4,6 +4,7 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 from course.models import Course
+from organization.models import CourseOrg
 
 
 class CourseListView(View):
@@ -43,5 +44,18 @@ class CourseListView(View):
 class CourseDetailView(View):
     """课程详情"""
     @staticmethod
-    def get(request):
-        return render(request, 'course-detail.html')
+    def get(request, course_id):
+        course = Course.objects.get(id=int(course_id))
+
+        # 增加课程点击数 访问一次增加1
+        course.click_nums += 1
+        course.save()
+        # 课程标签相同的即位相关课程
+        tag = course.tag
+        relate_course = Course.objects.exclude(id=int(course_id))
+        relate_course = relate_course.filter(tag=tag)[1:2]
+        return render(request, 'course-detail.html',
+                      {
+                          'course': course,
+                          'relate_course': relate_course
+                       })
